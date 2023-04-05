@@ -134,7 +134,7 @@ void printPostOrder(struct Node* node) {
     cout << node->data << " ";
 }
 
-int heightOfNode(struct Node* root)
+int heightOfNode(struct Node* root) //check the height of a tree from the deepest node of the tree(BST)
 {
     if (root == NULL)
         return 0;
@@ -159,6 +159,17 @@ int sizeOfTree(struct Node* root) { //to check the size of tree ,basically,"HOW 
         return 0;
     else {
         return sizeOfTree(root->left) + sizeOfTree(root->right) + 1;
+    }
+}
+
+int maxNumberInTree(struct Node* root) {//to find the maximum number in a tree.
+    if (root == NULL)
+        return -1;
+
+    else {
+        int maximum;
+        maximum = max(root->data, max(maxNumberInTree(root->left), maxNumberInTree(root->right)));
+        return maximum;
     }
 }
 
@@ -228,6 +239,8 @@ int main()
     cout << endl;
     cout << "Size of a tree :  " << sizeOfTree(root);
     cout << endl;
+    cout << endl;
+    cout << "Maximum Number in tree is :  " << maxNumberInTree(root);
     cout << endl;
 
 
