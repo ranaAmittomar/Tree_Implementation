@@ -97,7 +97,8 @@ Node* newNode(int data) //utility func to create a new Tree Node.
 {
     Node* temp = new Node;
     temp->data = data;
-    temp->left = temp->right = NULL;
+    temp->left = NULL;
+    temp->right = NULL;
     return temp;
 }
 
