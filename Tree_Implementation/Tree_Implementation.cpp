@@ -4,6 +4,7 @@
 #include <iostream>
 #include<vector>
 #include<queue>
+#include<math.h>
 using namespace std;
 
 
@@ -133,6 +134,26 @@ void printPostOrder(struct Node* node) {
     cout << node->data << " ";
 }
 
+int heightOfNode(struct Node* root)
+{
+    if (root == NULL)
+        return -1;
+    else
+    {
+        int left_side;
+        int right_side;
+        left_side = heightOfNode(root->left);
+        right_side = heightOfNode(root->right);
+        if (left_side > right_side)
+        {
+            return left_side + 1;
+
+        }
+        else
+            return right_side + 1;
+    }
+}
+
 
 int main()
 {
@@ -185,11 +206,19 @@ int main()
 
     printInOrder(root);
     cout << endl;
+    cout << endl;
     cout << "PreOrder traversal of binary tree is :  ";
     printPreOrder(root);
     cout << endl;
+    cout << endl;
     cout << "Post traversal of binary tree is :  ";
     printPostOrder(root);
+    cout << endl;
+    cout << endl;
+    cout<<"Height of the tree from the deepest node : " << heightOfNode(root);
+    cout << endl;
+
+   
 
     return 0;
 }
