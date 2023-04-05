@@ -154,6 +154,14 @@ int heightOfNode(struct Node* root)
     }
 }
 
+int sizeOfTree(struct Node* root) { //to check the size of tree ,basically,"HOW MANY NODES ARE THERE IN THE TREE"
+    if (root == NULL)
+        return 0;
+    else {
+        return sizeOfTree(root->left) + sizeOfTree(root->right) + 1;
+    }
+}
+
 
 int main()
 {
@@ -217,6 +225,11 @@ int main()
     cout << endl;
     cout<<"Height of the tree from the deepest node : " << heightOfNode(root);
     cout << endl;
+    cout << endl;
+    cout << "Size of a tree :  " << sizeOfTree(root);
+    cout << endl;
+    cout << endl;
+
 
    
 
