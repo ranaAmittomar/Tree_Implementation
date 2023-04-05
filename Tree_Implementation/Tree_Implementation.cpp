@@ -137,7 +137,7 @@ void printPostOrder(struct Node* node) {
 int heightOfNode(struct Node* root)
 {
     if (root == NULL)
-        return -1;
+        return 0;
     else
     {
         int left_side;
