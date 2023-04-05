@@ -173,6 +173,42 @@ int maxNumberInTree(struct Node* root) {//to find the maximum number in a tree.
     }
 }
 
+void levelOrderPrint(struct Node* root, int level) { //using recursion
+    if (root == NULL)
+        return;
+    if (level == 1) {
+        cout << root->data << " ";
+        return;
+    }
+    else(level > 1);
+    {
+        levelOrderPrint(root->left, level - 1);
+        levelOrderPrint(root->right, level - 1);
+    }
+}
+void printLevelOrderRec( struct Node* root)
+{
+    int h = heightOfNode(root);
+    int i;
+    for (i = 1; i <= h; i++)
+        levelOrderPrint(root, i);
+}
+void levelOrderPrintQue(struct Node* root) { //printing level order using QUEUE DATA STRUCTURE..
+
+    queue<Node*> q;
+    q.push(root);
+    while (!q.empty()) {
+        Node* curr = q.front();
+        cout << curr->data << " ";
+        q.pop();
+        if (curr->left != NULL)
+            q.push(curr->left);
+        if (curr->right != NULL)
+            q.push(curr->right);
+    }
+}
+
+
 
 int main()
 {
@@ -216,10 +252,10 @@ int main()
     */
 
     struct Node* root = newNode(1);
-    root->left = newNode(2);
+    root->left = newNode(32);
     root->right = newNode(3);
     root->left->left = newNode(4);
-    root->left->right = newNode(5);
+    root->left->right = newNode(9);
     // Function call
     cout << "Inorder traversal of binary tree is :  ";
 
@@ -242,9 +278,14 @@ int main()
     cout << endl;
     cout << "Maximum Number in tree is :  " << maxNumberInTree(root);
     cout << endl;
-
-
-   
+    cout << endl;
+    cout << "The Level Order Traversal using recursion is as follows O(n^2) :  ";
+    printLevelOrderRec(root);
+    cout << endl;
+    cout << endl;
+    cout << "The Level Order Traversal using recursion is as follows O(n) :  ";
+    levelOrderPrintQue(root);
+    cout << endl;
 
     return 0;
 }
