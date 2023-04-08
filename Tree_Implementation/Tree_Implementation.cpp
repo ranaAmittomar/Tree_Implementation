@@ -173,7 +173,7 @@ int maxNumberInTree(struct Node* root) {//to find the maximum number in a tree.
     }
 }
 
-void levelOrderPrint(struct Node* root, int level) { //using recursion
+void levelOrderPrint(struct Node* root, int level) { //using recursion O(N^2)
     if (root == NULL)
         return;
     if (level == 1) {
@@ -193,11 +193,12 @@ void printLevelOrderRec( struct Node* root)
     for (i = 1; i <= h; i++)
         levelOrderPrint(root, i);
 }
-void levelOrderPrintQue(struct Node* root) { //printing level order using QUEUE DATA STRUCTURE..
+void levelOrderPrintQue(struct Node* root) { //printing level order using QUEUE DATA STRUCTURE.. to print on same line ON(N)
 
     queue<Node*> q;
     q.push(root);
-    while (!q.empty()) {
+    while (!q.empty()) 
+    {
         Node* curr = q.front();
         cout << curr->data << " ";
         q.pop();
@@ -207,6 +208,32 @@ void levelOrderPrintQue(struct Node* root) { //printing level order using QUEUE 
             q.push(curr->right);
     }
 }
+
+void printLevelOrderInSepLine(struct Node* root) //Printing Level Order Traversal in separate Line..
+{
+    if (root == NULL)
+        return;
+    queue<Node*> q1;
+    q1.push(root);
+    while (q1.empty() == false)
+    {
+        int nodecount = q1.size();
+        while (nodecount > 0)
+        {
+            Node* node = q1.front();
+            cout << node->data << " ";
+            q1.pop();
+            if (node->left != NULL)
+                q1.push(node->left);
+            if (node->right != NULL)
+                q1.push(node->right);
+            nodecount--;
+        }
+        cout << endl;
+    }
+}
+
+
 
 
 
@@ -251,14 +278,17 @@ int main()
     printDegrees(Root, adj);
     */
 
-    struct Node* root = newNode(1);
-    root->left = newNode(32);
-    root->right = newNode(3);
-    root->left->left = newNode(4);
-    root->left->right = newNode(9);
-    // Function call
-    cout << "Inorder traversal of binary tree is :  ";
+    struct Node* root = newNode(5);
+    root->left = newNode(1);
+    root->right = newNode(7);
+    root->left->left = newNode(2);
+    root->left->right = newNode(4);
+    root->left->right->left = newNode(3);
+    root->left->right->right = newNode(6);
 
+    // Function call
+
+    cout << "Inorder traversal of binary tree is :  ";
     printInOrder(root);
     cout << endl;
     cout << endl;
@@ -283,8 +313,12 @@ int main()
     printLevelOrderRec(root);
     cout << endl;
     cout << endl;
-    cout << "The Level Order Traversal using recursion is as follows O(n) :  ";
+    cout << "The Level Order Traversal using Queue is as follows O(n) :  ";
     levelOrderPrintQue(root);
+    cout << endl;
+    cout << endl;
+    cout << "The line by line Level Order Traversal : ";
+    printLevelOrderInSepLine(root);
     cout << endl;
 
     return 0;
